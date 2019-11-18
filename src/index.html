@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ECommerceFinal</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+   <!-- Bootstrap -->
+   <link href="./assets/css/bootstrap-4.0.0.css" rel="stylesheet">
+
+</head>
+  <body onload="watchTask()">
+
+    <table >
+        <tr>
+    <td>descripcion</td>
+        </tr>
+      <tbody id="loadTask"></tbody>
+    </table>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+        <a href="Index.html"><img src="./assets/Imagenes/Logo_Blanco.png" width="200" height="100"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              
+              <li class="nav-item active">
+                <a class="nav-link" href="camisetas.html" role="button" aria-haspopup="true" aria-expanded="false">Camisetas</a>            </li>
+          
+          <li class="nav-item active">
+                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Contacto</a>            </li>
+          <li class="nav-item active">
+                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Preguntas Frecuentes</a>            </li>
+             
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Camisetas" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+  <app-root></app-root>
+
+
+
+
+  <footer class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p style="color:#FDFDFD">Copyright © Caustic Shop 2019. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+	
+  </footer>
+	   
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="./assets/js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap-4.0.0.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+    
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDL1VWgg3orQRRRBgWlFJ3M4pNqq_1WPPc",
+        authDomain: "camisetas-83318.firebaseapp.com",
+        databaseURL: "https://camisetas-83318.firebaseio.com",
+        projectId: "camisetas-83318",
+        storageBucket: "camisetas-83318.appspot.com",
+        messagingSenderId: "566791460262",
+        appId: "1:566791460262:web:b2461b3a53cf202110ab67",
+        measurementId: "G-TZDDW9G376"
+      };
+      firebase.initializedApp(firebaseConfig);
+    function getID(id){
+      return document.getElementById(id).value;
+    
+    }
+     
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    
+      firebase.analytics();
+      function getID(id){
+        return document.getElementById(id).value;
+      }
+    function innerHTML(id,result){
+      return document.getElementById(id).innerHTML+=result;
+    }
+    function table(descripcion){
+      return '<tr>'+descripcion+ '</tr>';
+    }
+    //inputTask("descripcion","");
+    function watchTask(){
+      var task = firebase.database().ref("contactos");
+      task.on("child_added",function(data){
+        var taskValue = data.val();
+    
+        var result=table(taskValue.descripcion);
+        innerHTML("loadTask",result);
+      });
+    }
+    </script>
+    
+    
+
+
+
+</body>
+</html>
